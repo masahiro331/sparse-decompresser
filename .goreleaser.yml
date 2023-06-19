@@ -3,7 +3,7 @@ before:
     - go mod tidy
 builds:
   -
-    main: .
+    main: ./cmd/main.go
     binary: spdc
     env:
       - CGO_ENABLED=0

@@ -1,12 +1,11 @@
 package main
 
 import (
+	"github.com/masahiro331/spdc"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
-
-	"github.com/masahiro331/spdc/pkg/spdc"
 )
 
 const (

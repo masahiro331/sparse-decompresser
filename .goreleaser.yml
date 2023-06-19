@@ -4,6 +4,7 @@ before:
 builds:
   -
     main: ./cmd/main.go
+    binary: spdc
     env:
       - CGO_ENABLED=0
 archives:

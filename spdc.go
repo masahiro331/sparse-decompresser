@@ -2,13 +2,13 @@ package spdc
 
 import (
 	"bytes"
-	"compress/gzip"
 	"context"
 	"fmt"
-	"golang.org/x/sync/errgroup"
-	"golang.org/x/sync/semaphore"
 	"io"
 	"os"
+
+	"golang.org/x/sync/errgroup"
+	"golang.org/x/sync/semaphore"
 )
 
 const (
@@ -73,26 +73,4 @@ func DecompressSparseReader(src io.Reader, dst os.File) error {
 	}
 
 	return nil
-}
-
-func DecompressSparseGzip(src, dst string) error {
-	w, err := os.Create(dst)
-
-	if err != nil {
-		return err
-	}
-	defer w.Close()
-
-	f, err := os.Open(src)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	gr, err := gzip.NewReader(f)
-	if err != nil {
-		return err
-	}
-
-	return DecompressSparseReader(gr, *w)
 }

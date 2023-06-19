@@ -1,4 +1,4 @@
-package sparse_decompresser
+package spdc
 
 import (
 	"bytes"

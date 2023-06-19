@@ -1,7 +1,7 @@
 package main
 
 import (
-	sparse_decompresser "github.com/masahiro331/sparse-decompresser"
+	"github.com/masahiro331/spdc"
 	"log"
 	"os"
 	"path/filepath"
@@ -20,7 +20,7 @@ func main() {
 	switch ext {
 	case GZIP:
 		outputFile := strings.TrimSuffix(os.Args[1], ".gz")
-		err := sparse_decompresser.DecompressSparseGzip(os.Args[1], outputFile)
+		err := spdc.DecompressSparseGzip(os.Args[1], outputFile)
 		if err != nil {
 			os.Remove(outputFile)
 			log.Fatal(err)

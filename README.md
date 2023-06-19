@@ -68,7 +68,7 @@ You can install spdc directly from our GitHub repository
 or get github release.
 
 ```
-go install github.com/yourusername/spdc@latest
+go install github.com/masairo331/spdc@latest
 ```
 
 

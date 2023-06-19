@@ -22,7 +22,7 @@ $ ls -lah ubuntu-2204.img.gz
 
 $ file ubuntu-2204.img.gz
 ubuntu-2204.img.gz: gzip compressed data, was "ubuntu-2204.img", last modified: Sun Jun 18 12:17:19 2023, from Unix, original size modulo 2^32 0
-``` 
+```
 
 Use spdc to decompress the image file.
 Actual data size is 1.8G.

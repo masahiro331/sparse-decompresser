@@ -1,5 +1,5 @@
 build:
-	go build -o spdc cmd/main.go
+	go build .
 
 clean:
 	rm spdc

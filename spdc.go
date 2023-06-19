@@ -8,11 +8,11 @@ import (
 	"os"
 
 	"golang.org/x/sync/errgroup"
-	"golang.org/x/sync/semaphore"
 )
 
 const (
-	blockSize = 4096
+	blockSize     = 4096
+	maxGoroutines = 64
 )
 
 // DecompressSparseGzipReader decompress sparse file
@@ -24,9 +24,7 @@ func DecompressSparseReader(src io.Reader, dst os.File) error {
 
 	// Use errgroup to manage goroutine and capture the first error returned by goroutines.
 	g, ctx := errgroup.WithContext(ctx)
-
-	// Use semaphore to limit the maximum number of goroutines.
-	sem := semaphore.NewWeighted(64)
+	g.SetLimit(maxGoroutines)
 
 	for {
 		n, err := src.Read(buf)
@@ -43,11 +41,6 @@ func DecompressSparseReader(src io.Reader, dst os.File) error {
 			return err
 		}
 
-		// Control the maximum number of goroutines.
-		if err := sem.Acquire(ctx, 1); err != nil {
-			return err
-		}
-
 		// Copy buffer to avoid race conditions.
 		b := make([]byte, n)
 		copy(b, buf[:n])
@@ -56,7 +49,6 @@ func DecompressSparseReader(src io.Reader, dst os.File) error {
 		currentSize := size
 
 		g.Go(func() error {
-			defer sem.Release(1)
 
 			if !bytes.Equal(b, make([]byte, len(b))) {
 				if _, err := dst.WriteAt(b, int64(currentSize-n)); err != nil {

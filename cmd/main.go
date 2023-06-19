@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/masahiro331/spdc"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/masahiro331/spdc"
 )
 
 const (
@@ -14,7 +15,7 @@ const (
 
 func main() {
 	if len(os.Args) != 2 {
-		log.Fatal("Usage: sparse-decompresser [filename]")
+		log.Fatal("Usage: spdc [filename]")
 	}
 	ext := filepath.Ext(os.Args[1])
 	switch ext {

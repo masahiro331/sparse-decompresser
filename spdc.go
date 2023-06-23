@@ -49,11 +49,11 @@ func DecompressSparseReader(src io.Reader, dst os.File) error {
 		currentSize := size
 
 		g.Go(func() error {
-
-			if !bytes.Equal(b, make([]byte, len(b))) {
-				if _, err := dst.WriteAt(b, int64(currentSize-n)); err != nil {
-					return err
-				}
+			if bytes.Equal(b, make([]byte, len(b))) {
+				return nil
+			}
+			if _, err := dst.WriteAt(b, int64(currentSize-n)); err != nil {
+				return err
 			}
 			return nil
 		})
